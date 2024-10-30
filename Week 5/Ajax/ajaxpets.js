@@ -32,27 +32,31 @@
    * TODO: Fetch data from the ajax pets api!
    */
   async function makeRequest() {
-    // TODO
     const animalType = qs("input[name='animal']:checked").value;
     const url = `https://courses.cs.washington.edu/courses/cse154/webservices/pets/ajaxpets.php?animal=${animalType}`;
   
     try {
       const response = await fetch(url);
       await statusCheck(response);
-      const images = await response.json();
+      const images = (await response.text()).match(/https?:\/\/\S+\.jpg/g) || [];
       showImages(images);
     } catch (error) {
       console.error("Failed to fetch images:", error);
     }
   }
-
-  function showImages(image){
-    const divPic = document.getElementById("picture");
-    const newImg = document.createElement("img");
-    newImg.src = image;
-    newImg.alt = "Photo"
-    divPic.appendChild(newImg);
+  
+  function showImages(images) {
+    const divPic = id("pictures");
+    // this line empty previous option result
+    divPic.innerHTML = "";
+    images.forEach(imageUrl => {
+      const newImg = document.createElement("img");
+      newImg.src = imageUrl;
+      newImg.alt = "Photo";
+      divPic.appendChild(newImg);
+    });
   }
+  
 
   /**
    * TODO: Implement any other functions you need
