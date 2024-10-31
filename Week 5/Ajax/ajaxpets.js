@@ -38,18 +38,21 @@
     try {
       const response = await fetch(url);
       await statusCheck(response);
-      const images = (await response.text()).match(/https?:\/\/\S+\.jpg/g) || [];
-      showImages(images);
+      const responseText = await response.text();
+      // manipulate string of responseText
+      const sources = responseText.match(/https?:\/\/\S+\.jpg/g) || [];
+
+      showImages(sources);
     } catch (error) {
       console.error("Failed to fetch images:", error);
     }
   }
   
-  function showImages(images) {
+  function showImages(source) {
     const divPic = id("pictures");
     // this line empty previous option result
     divPic.innerHTML = "";
-    images.forEach(imageUrl => {
+    source.forEach(imageUrl => {
       const newImg = document.createElement("img");
       newImg.src = imageUrl;
       newImg.alt = "Photo";
