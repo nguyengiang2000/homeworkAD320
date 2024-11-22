@@ -1,0 +1,22 @@
+Guide on What to Do:
+App.js:
+State Initialization: Initialize the state to keep track of the todos array. You can either use a constructor or initialize the state directly in the class. If you prefer, you can use Hooks instead.
+addTodo Function: Implement the addTodo function. This function should take a text input, create a new todo object, and add it to the list of todos in the state.
+Props Passing: Pass the addTodo function as a prop to the TodoForm component. Pass the todos array as a prop to the TodoList component.
+
+TodoForm.js:
+State Management: Initialize the state to keep track of the value in the input field. You can use a constructor or Hooks for this.
+Handle Change: Implement the handleChange function to update the state with the new value from the input field.
+Handle Submit: Implement the handleSubmit function to handle form submission. This function should call the addTodo function passed via props to add the new todo item to the todos array. After adding the todo, reset the input field in the state.
+Render Method: Write the render method to display the form with an input field and a submit button. The input field should be controlled by the state.
+
+TodoList.js:
+Render Todos: Implement the map function to iterate over the todos array (passed via props) and render each todo as a Todo component.
+
+Todo.js:
+Render Todo: Render the todo.text prop inside an li element. Optionally, add a checkbox and manage its checked state.
+
+Final Tips:
+Remember to Use the this Keyword: When referring to state or props inside class components, use this.state, this.props, etc.
+Use Controlled Components: Ensure that the input field in TodoForm.js is a controlled component by linking it to the component's state.
+Use map Properly: When mapping over the todos array in TodoList.js, provide a unique key prop for each item in the list.
